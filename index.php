@@ -15,24 +15,35 @@ conosciamo nella documentazione) che:
 1. name sia più lungo di 3 caratteri,
 2. mail contenga un punto e una chiocciola
 3. age sia un numero.
+
 Se tutto è ok stampare “Accesso riuscito”, altrimenti “Accesso negato”
 
 */
+
+// Snack 1 - Parte php 
 
 $matches = [
     "Squadre di casa" => 
         [ "Roma", "Juventus", "Fiorentina" ],
     
     "Squadre ospiti" =>
-        [ "Genoa", "Napoli", "Verona"],
+        [ "Genoa", "Napoli", "Verona" ],
 
     "Punti di casa" =>
         [ 2, 3, 2 ],
     
     "Punti di ospiti" =>
-        [  3, 1, 0]
-
+        [  3, 1, 0 ]
     ];  
+
+
+// Snack 2 - Parte php
+
+$name = $_GET["name"];
+$email = $_GET["email"];
+$age = $_GET["age"];
+
+var_dump($name, $email, $age);
 
 ?>
 
@@ -45,9 +56,10 @@ $matches = [
         <title>Php Snacks</title>
     </head>
     <body>
-        <h1>Tabellone partite - Snack 1</h1>
-        
+
+        <!-- Snack 1 parte HTML -->
         <div>
+            <h1>Tabellone partite - Snack 1</h1>
             <p>
                 <?php
                     $number_matches = count($matches["Squadre di casa"]);
@@ -58,18 +70,34 @@ $matches = [
                         echo $matches["Punti di casa"][$i]. " - ";
                         echo $matches["Punti di ospiti"][$i] . " <br> ";
                     };
-                
                 ?>
             </p>
         </div>
+        <!-- / Snack 1 parte HTML -->
         
-
-        
-
+        <!-- Snack 2 parte HTML -->
+        <div>
+            <h1> Validation - Snack 2 <h1>
+            <p>
+                <?php
+                    if (empty($name) || empty($email) || empty($age)) {            // Se la query name oppure mail oppure age sono vuote
+                        echo "Validazione non riuscita per campi vuoti";           // Restituisci Errore
+                    } else {                                                        // Altrimenti
+                        if (strlen($name) > 3 && strpos($email, "@") !== false && strpos ($email, ".") !== false) {  // Validazione
+                            echo "Accesso riuscito";
+                        } else {
+                            echo "Accesso negato";
+                        }
+                    };
+                ?>
+            </p>
+        </div>
+        <!-- / Snack 2 parte HTML -->
+ 
     </body>
 </html>
 
-
+    
  
  
  
